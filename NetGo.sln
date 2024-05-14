@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{B9CDA800-F494-4695-82B2-8A6220D81138}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetGo.Domain", "Core\NetGo.Domain\NetGo.Domain.csproj", "{E0B6D362-7954-4F39-854B-A8674F440F79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0B6D362-7954-4F39-854B-A8674F440F79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0B6D362-7954-4F39-854B-A8674F440F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0B6D362-7954-4F39-854B-A8674F440F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0B6D362-7954-4F39-854B-A8674F440F79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E0B6D362-7954-4F39-854B-A8674F440F79} = {B9CDA800-F494-4695-82B2-8A6220D81138}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85040CCD-862B-4AC7-96C5-42E453266C05}
+	EndGlobalSection
+EndGlobal
