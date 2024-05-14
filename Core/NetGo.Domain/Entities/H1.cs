@@ -2,7 +2,7 @@
 {
     public class H1 : Element
     {
-        public H1(string? content) : base(content)
+        public H1(string? content) : base(content, Enums.ElementType.H1)
         {
         }
     }

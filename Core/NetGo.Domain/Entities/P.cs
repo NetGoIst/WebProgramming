@@ -2,7 +2,7 @@
 {
     public class P : Element
     {
-        public P(string? content) : base(content)
+        public P(string? content) : base(content, Enums.ElementType.P)
         {
         }
     }
