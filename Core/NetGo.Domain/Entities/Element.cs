@@ -7,13 +7,26 @@ namespace NetGo.Domain.Entities
     {
         public string? Content { get; set; }
         public ElementType Type { get; set; }
+        public string? Style { get; set; }
+      //  public List<Element>? Children { get; set; }
 
         public Element(string? content, ElementType type)
         {
             Content = content;
             Type = type;
         }
+        public string ToHtml() {
+            /*
+            if (Children is not null && Children.Any())
+            {
+                foreach (Element element in Children)
+                {
+                    Content += element.ToHtml();
+                }
+            }
 
-        public string ToHtml() => $"<{Type}>{Content}</{Type}>";
+            */
+            return $"<{Type} class={Style}>{Content}</{Type}>";
+        }
     }
 }
