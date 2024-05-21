@@ -4,11 +4,11 @@ namespace NetGo.Domain.Entities
 {
     public class Body : EntityBase
     {
-        public List<Element> Elements { get; set; }
+        public List<Child> Children { get; set; }
 
         public Body()
         {
-            Elements = new List<Element>();
+            Children = new List<Child>();
         }
     }
 }

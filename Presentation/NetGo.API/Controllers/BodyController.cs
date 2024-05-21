@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NetGo.API.Models;
 using NetGo.Domain.Entities;
 using NetGo.Persistence.Contexts;
@@ -27,16 +28,17 @@ namespace NetGo.API.Controllers
         [HttpPost("[action]")]
         public IActionResult CreateElement(CreateElementRequest createElementRequest)
         {
-            Element element = createElementRequest.ElementType switch
+            /*Element element = createElementRequest.ElementType switch
             {
                 Domain.Enums.ElementType.H1 => new H1(createElementRequest.Content),
                 Domain.Enums.ElementType.P => new P(createElementRequest.Content),
+                Domain.Enums.ElementType.Div => new Div(createElementRequest.Content),
                 _ => throw new NotImplementedException(),
             };
 
             Body? body = _context.Bodies.FirstOrDefault(x => x.Id == createElementRequest.BodyId);
-            body?.Elements.Add(element);
-            _context.SaveChanges();
+            body?.Parent.Add(element);
+            _context.SaveChanges();*/
 
             return Ok();
         }
@@ -44,12 +46,12 @@ namespace NetGo.API.Controllers
         [HttpGet("[action]")]
         public IActionResult GetHtml(Guid bodyId)
         {
-            Body? body = _context.Bodies.FirstOrDefault(x => x.Id == bodyId);
+            Body? body = _context.Bodies.Include(x=> x.Parent).FirstOrDefault(x => x.Id == bodyId);
             string html = "<!DOCTYPE html><html><body>[[elements]]</body></html>";
             string elements = "";
-            body?.Elements.ForEach(x => elements += x.ToHtml());
+            body?.Parent.ForEach(x => elements += x.ToHtml());
             html = html.Replace("[[elements]]", elements);
-            return Ok(body?.Id);
+            return Ok(html);
         }
     }
 }

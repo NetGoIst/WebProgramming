@@ -11,14 +11,14 @@ using NetGo.Persistence.Contexts;
 namespace NetGo.Persistence.Migrations
 {
     [DbContext(typeof(NetGoDbContext))]
-    [Migration("20240514161209_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240518160521_mig2")]
+    partial class mig2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.12");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.19");
 
             modelBuilder.Entity("NetGo.Domain.Entities.Body", b =>
                 {
@@ -47,6 +47,9 @@ namespace NetGo.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Style")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Type")
                         .HasColumnType("INTEGER");
 
@@ -61,18 +64,26 @@ namespace NetGo.Persistence.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("NetGo.Domain.Entities.H1", b =>
+            modelBuilder.Entity("NetGo.Domain.Entities.Child", b =>
                 {
                     b.HasBaseType("NetGo.Domain.Entities.Element");
 
-                    b.HasDiscriminator().HasValue("H1");
+                    b.Property<int>("Order")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("ParentId")
+                        .HasColumnType("TEXT");
+
+                    b.HasIndex("ParentId");
+
+                    b.HasDiscriminator().HasValue("Child");
                 });
 
-            modelBuilder.Entity("NetGo.Domain.Entities.P", b =>
+            modelBuilder.Entity("NetGo.Domain.Entities.Parent", b =>
                 {
                     b.HasBaseType("NetGo.Domain.Entities.Element");
 
-                    b.HasDiscriminator().HasValue("P");
+                    b.HasDiscriminator().HasValue("Parent");
                 });
 
             modelBuilder.Entity("NetGo.Domain.Entities.Element", b =>
@@ -82,9 +93,25 @@ namespace NetGo.Persistence.Migrations
                         .HasForeignKey("BodyId");
                 });
 
+            modelBuilder.Entity("NetGo.Domain.Entities.Child", b =>
+                {
+                    b.HasOne("NetGo.Domain.Entities.Parent", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("NetGo.Domain.Entities.Body", b =>
                 {
                     b.Navigation("Elements");
+                });
+
+            modelBuilder.Entity("NetGo.Domain.Entities.Parent", b =>
+                {
+                    b.Navigation("Children");
                 });
 #pragma warning restore 612, 618
         }
